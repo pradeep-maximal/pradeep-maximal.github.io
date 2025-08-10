@@ -10,49 +10,64 @@
 
 <body>
 
-    <header>
-     <nav>
-  <div class="nav-left">
-    
-  </div>
-  <ul class="nav-links">
-    <li><a href="#hero">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+  <header>
+
+    <nav style="display: flex; align-items: center; justify-content: space-between; width: 95%;">
+      <h1 style="margin-right:1.5rem;">Pradeep</h1>
+      <ul class="nav-links" id="nav-links" style="flex: 1 1 auto; justify-content: flex-end; margin: 0;">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: 1rem; margin-left: 1.5rem;">
+        <div class="menu-toggle" id="menu-toggle" aria-label="Open menu" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <button id="theme-toggle" aria-label="Toggle theme" style="background: none; border: none; cursor: pointer; padding: 0; font-size: 1.7rem; color: #00ffcc; display: flex; align-items: center;">
+          <span id="theme-icon" aria-hidden="true">🌙</span>
+        </button>
+      </div>
+    </nav>
+
 
     </header>
 
     <main>  
 
-        <section id="hero">
-          <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.14/build/spline-viewer.js"></script>
-          <spline-viewer class="spline-3d" url="https://prod.spline.design/NqnMW99H0YzRWndZ/scene.splinecode"></spline-viewer>
-         
-       
-          </section>
+
+
+        <section id="home" class="section">
+          <div id="hero" class="hero-simple">
+            <h1 class="hero-title">Hi! I'm <span class="highlight">Pradeep</span></h1>
+            <h2 class="hero-subtitle">Cybersecurity Engineer <span class="dot">•</span> Penetration Tester <span class="dot">•</span> SOC Analyst</h2>
+            <p class="hero-description">
+              I secure digital environments, hunt threats, and love breaking & fixing things. Let's make the web safer together!
+            </p>
+          </div>
+        </section>
 
     
-         <!--About Section-->
-        <section id="about" class="section">
-    <div class="container">
-        <!-- <img src="assets/avatar.png" alt="Pradeep Avatar" class="avatar"> -->
- 
-        <div class="about-text">
-            <h2>About Me</h2>
-            <p>
-                I'm a Cybersecurity graduate with hands-on experience in penetration testing, SOC analysis, and security research. I'm passionate about helping organizations secure their digital environments and love diving into vulnerabilities, attack vectors, and detection techniques. Currently exploring threat hunting, Red Team tactics, and SIEM tools.
-            </p>
-        </div>
         
-    </div>
-      <a href="assets/Resume.pdf" download class="download-btn">
-        📄 My Resume 
+
+        <section id="about" class="section">
+  <div class="container">
+    <h1 class="section-title">About Me</h1>
+    <p class="section-description">
+      Cybersecurity graduate with hands-on experience in Linux systems, SIEM monitoring, vulnerability assessments,
+ and scripting with Python and PowerShell. Passionate about securing critical infrastructure and supporting
+ national security objectives. Demonstrated understanding of information security principles, system hardening,
+ and secure configuration aligned with frameworks like ASD Essential Eight and NIST. Experienced in security
+ operations simulations (via TryHackMe, Hack The Box), developing playbooks, and contributing to incident
+ detection and response workflows. Strong communicator and collaborative team member, eager to grow within a
+ mission-focused environment that values technical excellence and continuous learning.
+    </p>
+    <a href="assets/Resume.pdf" download class="download-btn">
+      📄 Download My Resume
     </a>
-</section>
 
 <!--Projects Section-->
 <section id="projects" class="section">
@@ -191,6 +206,48 @@
 
     <script src="src/script.js"></script>
     <script src="src/style_script.js"></script>
+    <script>
+      // Responsive menu toggle
+      const menuToggle = document.getElementById('menu-toggle');
+      const navLinks = document.getElementById('nav-links');
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+      });
+      menuToggle.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          navLinks.classList.toggle('open');
+        }
+      });
+      // Close menu on link click (mobile)
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('open');
+        });
+      });
+    </script>
+    <script>
+      // Theme toggle
+      const themeToggle = document.getElementById('theme-toggle');
+      const themeIcon = document.getElementById('theme-icon');
+      function setTheme(mode) {
+        if (mode === 'light') {
+          document.body.classList.add('light-theme');
+          themeIcon.textContent = '☀️';
+        } else {
+          document.body.classList.remove('light-theme');
+          themeIcon.textContent = '🌙';
+        }
+        localStorage.setItem('theme', mode);
+      }
+      // Initial theme
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') setTheme('light');
+      else setTheme('dark');
+      themeToggle.addEventListener('click', () => {
+        if (document.body.classList.contains('light-theme')) setTheme('dark');
+        else setTheme('light');
+      });
+    </script>
     
 </body>
 <footer style="text-align: center; padding: 20px; color: #666;">
