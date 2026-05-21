@@ -3,9 +3,9 @@
    ============================================================ */
 
 /* ── Config ─────────────────────────────────────────────── */
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY71EvQBRMlI4dulHR4';   // replace after creating EmailJS account
-const EMAILJS_SERVICE_ID  = 'service_5cqf6xl';   // replace with your EmailJS service ID
-const EMAILJS_TEMPLATE_ID = 'template_wwnnidh';  // replace with your EmailJS template ID
+const EMAILJS_PUBLIC_KEY  = '71EvQBRMlI4dulHR4';
+const EMAILJS_SERVICE_ID  = 'service_5cqf6xl';
+const EMAILJS_TEMPLATE_ID = 'template_wwnnidh';
 
 const TYPED_STRINGS = [
   'Service Desk Analyst',
@@ -289,11 +289,16 @@ function initContactForm() {
     // If EmailJS keys are not configured, fall back to mailto
     if (EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
       const mailtoLink = `mailto:pradeep23rk@gmail.com?subject=${encodeURIComponent(params.subject)}&body=${encodeURIComponent(`Name: ${params.name}\nEmail: ${params.email}\n\n${params.message}`)}`;
-      window.location.href = mailtoLink;
       submitBtn.disabled = false;
       btnText.hidden     = false;
       btnLoading.hidden  = true;
-      showStatus(status, 'Opening your email client — EmailJS is not yet configured.', 'success');
+      showStatus(status, 'Opening your email client…', 'success');
+      // Programmatic anchor click is the reliable cross-browser way to trigger mailto
+      const a = document.createElement('a');
+      a.href = mailtoLink;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
       return;
     }
 
