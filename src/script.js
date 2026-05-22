@@ -10,7 +10,6 @@ const EMAILJS_TEMPLATE_ID = 'template_wwnnidh';
 const TYPED_STRINGS = [
   'Service Desk Analyst',
   'Troubleshooting Expert',
-  'ITIL Certified',
   'Security-Focused',
   'IT Support Engineer',
 ];
